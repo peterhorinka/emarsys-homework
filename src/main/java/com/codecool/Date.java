@@ -11,9 +11,18 @@ public class Date {
         this.minute = minute;
     }
 
+    Date(Day day, int hour) {
+        this.day = day;
+        this.hour = hour;
+        this.minute = 0;
+    }
 
     @Override
     public String toString() {
-        return "Due date is: " + day + " " + hour + ":" + minute;
+        if (minute <= 9) {
+            return "Due date is: " + day + " " + hour + ":0" + minute;
+        } else {
+            return "Due date is: " + day + " " + hour + ":" + minute;
+        }
     }
 }
