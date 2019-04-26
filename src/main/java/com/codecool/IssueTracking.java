@@ -2,9 +2,9 @@ package com.codecool;
 
 public class IssueTracking {
 
-    final int WORKHOURS = 8;
-    final int WORKSTART = 9;
-    final int WORKEND = 17;
+    private final int WORKHOURS = 8;
+    private final int WORKSTART = 9;
+    private final int WORKEND = 17;
 
     public String calculateDueDate(Date submitDate, int turnAroundTime) {
         if (submitDate.hour > 23 || submitDate.minute > 59){
@@ -24,7 +24,7 @@ public class IssueTracking {
     }
 
     private void turnAroundTimeModuloWorkhoursIsNotZero(Date submitDate, int turnAroundTime){
-        for (int i = 0; i < turnAroundTime / WORKHOURS; i++) {
+        for (int i = 0; i < (turnAroundTime / WORKHOURS); i++) {
             submitDate.day = submitDate.day.next();
         }
         submitDate.hour += turnAroundTime % WORKHOURS;
