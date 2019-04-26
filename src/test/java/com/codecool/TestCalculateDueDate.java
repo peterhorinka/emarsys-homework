@@ -1,7 +1,10 @@
 package com.codecool;
 
+import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 
 class TestCalculateDueDate {
@@ -33,6 +36,15 @@ class TestCalculateDueDate {
         String actualResult = issue.calculateDueDate(submitDate, turnAroundTime);
         String expectedResult = "Due date is: TUESDAY 9:33";
         Assertions.assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    void CDDShouldReturnErrorMessage(){
+        Date submitDate = new Date(Day.MONDAY, 25, 61);
+        int turnAroundTime = 8;
+        assertThrows(IllegalArgumentException.class, () -> {
+            issue.calculateDueDate(submitDate,turnAroundTime);
+        });
     }
 
 }
