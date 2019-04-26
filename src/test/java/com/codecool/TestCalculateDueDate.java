@@ -1,18 +1,20 @@
 package com.codecool;
 
-import com.sun.javaws.exceptions.InvalidArgumentException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-
 class TestCalculateDueDate {
 
     private IssueTracking issue = new IssueTracking();
 
+    /**
+     * In the tests I refer to CalculateDueDate method as CDD
+     **/
+
     @Test
-    void CDDShouldReturnWednesday10am() {
+    void givenTurnAroundTimeIs16CDDShouldReturn2WorkdaysLater() {
         Date submitDate = new Date(Day.MONDAY, 10, 10);
         int turnAroundTime = 16;
         String actualResult = issue.calculateDueDate(submitDate, turnAroundTime);
@@ -21,7 +23,7 @@ class TestCalculateDueDate {
     }
 
     @Test
-    void CDDShouldReturnFriday15pm() {
+    void GivenTurnAroundTimeIs30CDDShouldCycle3DaysAndAddRemainingHoursToDueDate() {
         Date submitDate = new Date(Day.TUESDAY, 9);
         int turnAroundTime = 30;
         String actualResult = issue.calculateDueDate(submitDate, turnAroundTime);
@@ -39,12 +41,11 @@ class TestCalculateDueDate {
     }
 
     @Test
-    void CDDShouldReturnErrorMessage(){
+    void CDDShouldReturnIllegalArguementMessageWhenArguementsAreInvalid(){
         Date submitDate = new Date(Day.MONDAY, 25, 61);
         int turnAroundTime = 8;
         assertThrows(IllegalArgumentException.class, () -> {
             issue.calculateDueDate(submitDate,turnAroundTime);
         });
     }
-
 }

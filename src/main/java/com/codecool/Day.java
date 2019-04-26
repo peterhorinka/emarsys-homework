@@ -7,8 +7,6 @@ public enum Day {
     THURSDAY,
     FRIDAY;
 
-
-
     private static Day[] vals = values();
 
     public Day next(){
